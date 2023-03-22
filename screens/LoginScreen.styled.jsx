@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   },
 
   wrapper: {
+    // flex: 1,
     flexDirection: "column",
     alignItems: "center",
     borderTopLeftRadius: 20,
@@ -14,19 +15,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff",
     padding: 16,
-    paddingTop: 0,
+    paddingTop: 32,
     paddingBottom: 0,
   },
-
   avatarWrapper: {
     width: 120,
     height: 120,
     backgroundColor: "#F6F6F6",
-    transform: [{ translateY: -60 }],
     borderRadius: 16,
-    overflow: "hidden",
+    transform: [{ translateY: -60 }],
   },
-
   title: {
     fontFamily: "Roboto",
     fontStyle: "normal",
@@ -39,9 +37,6 @@ const styles = StyleSheet.create({
 
   form: {
     width: "100%",
-    // borderColor: "#000",
-    // borderWidth: 1,
-    marginBottom: 43,
   },
 
   inputWrapper: {
@@ -87,7 +82,7 @@ const styles = StyleSheet.create({
 
   toLoginBtn: {},
 
-  toLoginBtnText: {
+  toRegisterBtnText: {
     fontFamily: "Roboto",
     fontStyle: "normal",
     fontWeight: 400,
@@ -95,7 +90,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
-    marginBottom: 45,
+    marginBottom: 111,
   },
 });
 

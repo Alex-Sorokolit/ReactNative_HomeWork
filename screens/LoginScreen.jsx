@@ -2,24 +2,22 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  Image,
   TextInput,
   Pressable,
   Keyboard,
   TouchableWithoutFeedback,
   useWindowDimensions,
 } from "react-native";
-import styles from "./RegistrationScreen.styled";
+import styles from "./LoginScreen.styled";
 
 const initialState = {
-  name: "",
   email: "",
   password: "",
 };
 
-const RegistrationScreen = () => {
+const LoginScreen = () => {
   const [keyboardStatus, setKeyboardStatus] = useState("");
-  const [candidat, setCandidat] = useState(initialState);
+  const [user, setUser] = useState(initialState);
   const { width } = useWindowDimensions();
 
   useEffect(() => {
@@ -41,42 +39,24 @@ const RegistrationScreen = () => {
   }, []);
 
   const SignIn = () => {
-    console.log(candidat);
-    setCandidat(initialState);
+    console.log(user);
+    setUser(initialState);
   };
 
   return (
     <TouchableWithoutFeedback
       onPress={() => {
+        // setKeyboardStatus(false);
         Keyboard.dismiss();
       }}
     >
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          <View style={styles.avatarWrapper}>
-            <Image source={require("../assets/Avatar.jpg")} />
-          </View>
-          <Text style={styles.title}>Registration</Text>
+          <Text style={styles.title}>Log In</Text>
 
           <View
             style={{ ...styles.form, marginBottom: keyboardStatus ? 32 : 43 }}
           >
-            <View style={styles.inputWrapper}>
-              <Text style={styles.inputTitle}>Name</Text>
-              <TextInput
-                style={styles.input}
-                onFocus={() => {
-                  setKeyboardStatus(true);
-                }}
-                value={candidat.name}
-                onChangeText={(value) =>
-                  setCandidat((prevState) => ({ ...prevState, name: value }))
-                }
-                maxLength={10}
-                mode="outlined"
-              />
-            </View>
-
             <View style={styles.inputWrapper}>
               <Text style={styles.inputTitle}>Email</Text>
               <TextInput
@@ -84,9 +64,9 @@ const RegistrationScreen = () => {
                 onFocus={() => {
                   setKeyboardStatus(true);
                 }}
-                value={candidat.email}
+                value={user.email}
                 onChangeText={(value) =>
-                  setCandidat((prevState) => ({ ...prevState, email: value }))
+                  setUser((prevState) => ({ ...prevState, email: value }))
                 }
                 maxLength={10}
                 mode="outlined"
@@ -101,9 +81,9 @@ const RegistrationScreen = () => {
                 onFocus={() => {
                   setKeyboardStatus(true);
                 }}
-                value={candidat.password}
+                value={user.password}
                 onChangeText={(value) =>
-                  setCandidat((prevState) => ({
+                  setUser((prevState) => ({
                     ...prevState,
                     password: value,
                   }))
@@ -123,13 +103,13 @@ const RegistrationScreen = () => {
               ]}
               onPress={() => SignIn()}
             >
-              <Text style={styles.registerBtnText}>Sign In </Text>
+              <Text style={styles.registerBtnText}>Log In </Text>
             </Pressable>
           )}
           {!keyboardStatus && (
             <Pressable style={styles.toLoginBtn}>
-              <Text style={styles.toLoginBtnText}>
-                Already have an account? Log In
+              <Text style={styles.toRegisterBtnText}>
+                Don't have an account? Register
               </Text>
             </Pressable>
           )}
@@ -139,4 +119,4 @@ const RegistrationScreen = () => {
   );
 };
 
-export default RegistrationScreen;
+export default LoginScreen;
