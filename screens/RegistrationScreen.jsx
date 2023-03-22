@@ -23,7 +23,7 @@ const RegistrationScreen = () => {
   const { width } = useWindowDimensions();
 
   useEffect(() => {
-    console.log(width);
+    // console.log(width);
   }, [width]);
 
   useEffect(() => {

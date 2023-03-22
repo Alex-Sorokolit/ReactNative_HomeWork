@@ -21,7 +21,7 @@ const LoginScreen = () => {
   const { width } = useWindowDimensions();
 
   useEffect(() => {
-    console.log(width);
+    // console.log(width);
   }, [width]);
 
   useEffect(() => {
@@ -46,7 +46,6 @@ const LoginScreen = () => {
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        // setKeyboardStatus(false);
         Keyboard.dismiss();
       }}
     >
