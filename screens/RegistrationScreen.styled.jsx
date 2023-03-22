@@ -5,12 +5,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
+
   wrapper: {
+    // flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     justifyContent: "center",
     backgroundColor: "#fff",
     padding: 16,
+    paddingTop: 0,
+  },
+  avatarWrapper: {
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+    transform: [{ translateY: -60 }],
   },
   title: {
     fontFamily: "Roboto",
@@ -23,6 +35,9 @@ const styles = StyleSheet.create({
   },
 
   form: {
+    width: "100%",
+    // borderColor: "#000",
+    // borderWidth: 1,
     marginBottom: 43,
   },
 
@@ -52,10 +67,10 @@ const styles = StyleSheet.create({
     color: "#212121",
   },
   registerBtn: {
-    // backgroundColor: "#FF6C00",
     borderRadius: 100,
     padding: 16,
     marginBottom: 16,
+    width: "100%",
   },
   registerBtnText: {
     fontFamily: "Roboto",
@@ -78,6 +93,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#1B4371",
     marginBottom: 45,
+  },
+  status: {
+    padding: 10,
+    textAlign: "center",
   },
 });
 
