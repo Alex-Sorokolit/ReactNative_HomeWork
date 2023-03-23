@@ -13,11 +13,12 @@
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.3",
-    "react-native-vector-icons": "^9.2.0",
-    "styled-components": "^5.3.9"
+    "react-native-svg": "13.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
+    "overrides": {
+     "react-devtools-core": "~4.25.0"},
   "private": true
 }

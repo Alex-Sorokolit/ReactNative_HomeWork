@@ -10,6 +10,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import styles from "./RegistrationScreen.styled";
+import AddButtonSvg from "../components/AddButtonSvg";
 
 const initialState = {
   name: "",
@@ -53,8 +54,16 @@ const RegistrationScreen = () => {
     >
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          <View style={styles.avatarWrapper}>
-            <Image source={require("../assets/Avatar.jpg")} />
+          <View style={styles.avatar}>
+            <View style={styles.imgWrapper}>
+              <Image
+                style={styles.img}
+                source={require("../assets/Avatar.jpg")}
+              />
+            </View>
+            <Pressable style={styles.addBtn}>
+              <AddButtonSvg />
+            </Pressable>
           </View>
           <Text style={styles.title}>Registration</Text>
 
@@ -88,7 +97,7 @@ const RegistrationScreen = () => {
                 onChangeText={(value) =>
                   setCandidat((prevState) => ({ ...prevState, email: value }))
                 }
-                maxLength={10}
+                maxLength={20}
                 mode="outlined"
               />
             </View>

@@ -67,7 +67,7 @@ const LoginScreen = () => {
                 onChangeText={(value) =>
                   setUser((prevState) => ({ ...prevState, email: value }))
                 }
-                maxLength={10}
+                maxLength={20}
                 mode="outlined"
               />
             </View>

@@ -17,14 +17,25 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0,
   },
-
-  avatarWrapper: {
+  avatar: {
+    position: "relative",
+    // borderColor: "red",
+    // borderWidth: 1,
+    transform: [{ translateY: -60 }],
+  },
+  imgWrapper: {
     width: 120,
     height: 120,
-    backgroundColor: "#F6F6F6",
-    transform: [{ translateY: -60 }],
+  },
+  img: {
     borderRadius: 16,
-    overflow: "hidden",
+    // borderColor: "#555",
+    // borderWidth: 1,
+  },
+  addBtn: {
+    position: "absolute",
+    bottom: 14,
+    right: -12,
   },
 
   title: {
@@ -39,8 +50,6 @@ const styles = StyleSheet.create({
 
   form: {
     width: "100%",
-    // borderColor: "#000",
-    // borderWidth: 1,
     marginBottom: 43,
   },
 
