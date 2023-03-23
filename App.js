@@ -1,17 +1,25 @@
 import { StatusBar } from "expo-status-bar";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import RegistrationScreen from "./screens/RegistrationScreen";
-// import LoginScreen from "./screens/LoginScreen";
+import { StyleSheet, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthNavigation from "./screens/AuthNavigation";
+import MainNavigation from "./screens/MainNavigator";
+
+const useRoute = (isAuth) => {
+  if (!isAuth) {
+    return <AuthNavigation />;
+  }
+  return <MainNavigation />;
+};
 
 export default function App() {
+  const routing = useRoute({});
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require("./assets/BG.jpg")} style={styles.image}>
-        <RegistrationScreen />
-        {/* <LoginScreen /> */}
-      </ImageBackground>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        {routing}
+        <StatusBar style="auto" />
+      </View>
+    </NavigationContainer>
   );
 }
 
@@ -19,11 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F2ECEE",
-    justifyContent: "center",
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
     justifyContent: "center",
   },
 });
