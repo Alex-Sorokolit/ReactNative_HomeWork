@@ -3,9 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+  },
+  bgImage: {
+    flex: 1,
+    resizeMode: "cover",
+    // justifyContent: "center",
     justifyContent: "flex-end",
   },
-
   wrapper: {
     flexDirection: "column",
     alignItems: "center",
@@ -22,6 +27,7 @@ const styles = StyleSheet.create({
     // borderColor: "red",
     // borderWidth: 1,
     transform: [{ translateY: -60 }],
+    marginBottom: -30,
   },
   imgWrapper: {
     width: 120,
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 35,
     textAlign: "center",
-    marginBottom: 32,
+    marginBottom: 7,
   },
 
   form: {
@@ -94,7 +100,10 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
 
-  toLoginBtn: {},
+  toLoginBtn: {
+    borderBottomWidth: 2,
+    marginBottom: 45,
+  },
 
   toLoginBtnText: {
     fontFamily: "Roboto",
@@ -104,7 +113,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: "center",
     color: "#1B4371",
-    marginBottom: 45,
   },
 });
 
