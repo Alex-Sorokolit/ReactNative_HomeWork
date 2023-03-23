@@ -1,12 +1,11 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import RegistrationScreen from "./RegistrationScreen";
-import LoginScreen from "./LoginScreen";
+import RegistrationScreen from "./auth/RegistrationScreen";
+import LoginScreen from "./auth/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 
-const Navigation = () => {
+const AuthNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -26,4 +25,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default AuthNavigation;

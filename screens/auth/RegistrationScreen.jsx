@@ -3,22 +3,25 @@ import {
   View,
   ImageBackground,
   Text,
+  Image,
   TextInput,
   Pressable,
   Keyboard,
   TouchableWithoutFeedback,
   useWindowDimensions,
 } from "react-native";
-import styles from "./LoginScreen.styled";
+import styles from "./RegistrationScreen.styled";
+import AddButtonSvg from "../../components/AddButtonSvg";
 
 const initialState = {
+  name: "",
   email: "",
   password: "",
 };
 
-const LoginScreen = ({ navigation }) => {
+const RegistrationScreen = ({ navigation }) => {
   const [keyboardStatus, setKeyboardStatus] = useState("");
-  const [user, setUser] = useState(initialState);
+  const [candidat, setCandidat] = useState(initialState);
   const { width } = useWindowDimensions();
 
   useEffect(() => {
@@ -40,8 +43,8 @@ const LoginScreen = ({ navigation }) => {
   }, []);
 
   const SignIn = () => {
-    console.log(user);
-    setUser(initialState);
+    console.log(candidat);
+    setCandidat(initialState);
   };
 
   return (
@@ -52,15 +55,42 @@ const LoginScreen = ({ navigation }) => {
     >
       <View style={styles.container}>
         <ImageBackground
-          source={require("../assets/BG.jpg")}
+          source={require("../../assets/BG.jpg")}
           style={styles.bgImage}
         >
           <View style={styles.wrapper}>
-            <Text style={styles.title}>Log In</Text>
+            <View style={styles.avatar}>
+              <View style={styles.imgWrapper}>
+                <Image
+                  style={styles.img}
+                  source={require("../../assets/Avatar.jpg")}
+                />
+              </View>
+              <Pressable style={styles.addBtn}>
+                <AddButtonSvg />
+              </Pressable>
+            </View>
+            <Text style={styles.title}>Registration</Text>
 
             <View
               style={{ ...styles.form, marginBottom: keyboardStatus ? 32 : 43 }}
             >
+              <View style={styles.inputWrapper}>
+                <Text style={styles.inputTitle}>Name</Text>
+                <TextInput
+                  style={styles.input}
+                  onFocus={() => {
+                    setKeyboardStatus(true);
+                  }}
+                  value={candidat.name}
+                  onChangeText={(value) =>
+                    setCandidat((prevState) => ({ ...prevState, name: value }))
+                  }
+                  maxLength={10}
+                  mode="outlined"
+                />
+              </View>
+
               <View style={styles.inputWrapper}>
                 <Text style={styles.inputTitle}>Email</Text>
                 <TextInput
@@ -68,9 +98,9 @@ const LoginScreen = ({ navigation }) => {
                   onFocus={() => {
                     setKeyboardStatus(true);
                   }}
-                  value={user.email}
+                  value={candidat.email}
                   onChangeText={(value) =>
-                    setUser((prevState) => ({ ...prevState, email: value }))
+                    setCandidat((prevState) => ({ ...prevState, email: value }))
                   }
                   maxLength={20}
                   mode="outlined"
@@ -85,9 +115,9 @@ const LoginScreen = ({ navigation }) => {
                   onFocus={() => {
                     setKeyboardStatus(true);
                   }}
-                  value={user.password}
+                  value={candidat.password}
                   onChangeText={(value) =>
-                    setUser((prevState) => ({
+                    setCandidat((prevState) => ({
                       ...prevState,
                       password: value,
                     }))
@@ -107,7 +137,7 @@ const LoginScreen = ({ navigation }) => {
                 ]}
                 onPress={() => SignIn()}
               >
-                <Text style={styles.registerBtnText}>Log In </Text>
+                <Text style={styles.registerBtnText}>Sign In </Text>
               </Pressable>
             )}
             {!keyboardStatus && (
@@ -118,12 +148,10 @@ const LoginScreen = ({ navigation }) => {
                   },
                   styles.toLoginBtn,
                 ]}
-                onPress={() =>
-                  navigation.navigate("Registration", { name: "Registration" })
-                }
+                onPress={() => navigation.navigate("Login", { name: "Login" })}
               >
-                <Text style={styles.toRegisterBtnText}>
-                  Don't have an account? Register
+                <Text style={styles.toLoginBtnText}>
+                  Already have an account? Log In
                 </Text>
               </Pressable>
             )}
@@ -134,4 +162,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default RegistrationScreen;

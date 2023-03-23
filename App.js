@@ -1,13 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import Navigation from "./screens/Navigation";
+import AuthNavigation from "./screens/AuthNavigation";
+import MainNavigation from "./screens/MainNavigator";
+
+const useRoute = (isAuth) => {
+  if (!isAuth) {
+    return <AuthNavigation />;
+  }
+  return <MainNavigation />;
+};
 
 export default function App() {
+  const routing = useRoute({});
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <Navigation />
+        {routing}
         <StatusBar style="auto" />
       </View>
     </NavigationContainer>
