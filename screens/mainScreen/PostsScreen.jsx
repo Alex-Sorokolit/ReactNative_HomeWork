@@ -23,13 +23,15 @@ export default PostsScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: 32,
-    paddingVertical: 16,
-    backgroundColor: "#101010",
+    paddingHorizontal: 16,
   },
 
   user: {
     flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
 
   avatar: {
