@@ -1,18 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { TextInput, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { TextInput, Pressable } from "react-native";
+import { Camera } from "expo-camera";
 
 const CreatePostsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.imageBox}>
-        <View style={styles.circle}>
+      <Camera style={styles.camera}>
+        <Pressable
+          style={styles.circle}
+          onPress={() => {
+            console.log("take photo");
+          }}
+        >
           <MaterialIcons name="photo-camera" size={24} color="#BDBDBD" />
-        </View>
-      </View>
+        </Pressable>
+      </Camera>
       <Text style={styles.downoladText}>Downolad photo</Text>
 
       <SimpleLineIcons name="location-pin" size={24} color="#BDBDBD" />
@@ -58,7 +63,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: "#fff",
   },
-  imageBox: {
+  camera: {
     width: "100%",
     height: 240,
     backgroundColor: "#F6F6F6",
