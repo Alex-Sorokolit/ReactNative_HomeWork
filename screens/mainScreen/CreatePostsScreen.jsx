@@ -80,7 +80,7 @@ const CreatePostsScreen = ({ navigation }) => {
     console.log("send pressed");
     console.log("navigation", navigation);
     // викликаємо навігацію на сторінку з постами і передаємо об'єкт із даними
-    navigation.navigate("Posts", { photo: photo });
+    navigation.navigate("DefaultScreen1", { photo: photo });
     setCamera(null);
   };
 
@@ -121,17 +121,19 @@ const CreatePostsScreen = ({ navigation }) => {
       </Camera>
       <Text style={styles.downoladText}>Downolad photo</Text>
 
-      <SimpleLineIcons
-        name="location-pin"
-        size={24}
-        color="#BDBDBD"
-        style={styles.locationIcon}
-      />
-      <TextInput
-        style={styles.inputLocation}
-        mode="outlined"
-        placeholder="Location"
-      />
+      <View style={styles.locationSection}>
+        <SimpleLineIcons
+          name="location-pin"
+          size={24}
+          color="#BDBDBD"
+          style={styles.locationIcon}
+        />
+        <TextInput
+          style={styles.inputLocation}
+          mode="outlined"
+          placeholder="Location"
+        />
+      </View>
       <Pressable
         style={({ pressed }) => [
           styles.publicationBtn,

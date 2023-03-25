@@ -72,15 +72,30 @@ const styles = StyleSheet.create({
     marginBottom: 98,
   },
   // location _________________________
+  locationSection: {
+    flexDirection: "row",
+    justifyContent: "center",
+    // alignItems: "center",
+    backgroundColor: "#fff",
+    width: "100%",
+    paddingHorizontal: 16,
+
+    // borderWidth: 1,
+    borderColor: "#E8E8E8",
+    borderBottomWidth: 1,
+    marginBottom: 32,
+    paddingBottom: 16,
+  },
+
   locationIcon: {
     color: "#BDBDBD",
+    marginRight: 8,
   },
 
   inputLocation: {
     width: "100%",
-    borderBottomWidth: 1,
-    borderColor: "#E8E8E8",
-    marginBottom: 32,
+    fontSize: 16,
+    color: "#212121",
   },
 
   // Publication _____________________
