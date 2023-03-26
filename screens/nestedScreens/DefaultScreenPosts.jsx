@@ -36,7 +36,7 @@ const DefaultScreenPosts = ({ route, navigation }) => {
         <FlatList
           data={posts}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Item photo={item.photo} />}
+          renderItem={({ item }) => <Item photo={item.photo.photo} />}
         />
       )}
       <Button

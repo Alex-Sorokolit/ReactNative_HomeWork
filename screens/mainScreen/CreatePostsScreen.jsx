@@ -9,14 +9,30 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
+const initialPhoto = {
+  photo: "",
+  description: "",
+  location: "",
+};
+
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(CameraType.back);
-  const [photo, setPhoto] = useState(null);
-  const [isDisabled, setDisabled] = useState(false);
+  const [photo, setPhoto] = useState(initialPhoto);
+  const [isDisabled, setDisabled] = useState(true);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    if (
+      photo.photo !== "" &&
+      photo.description !== "" &&
+      photo.location !== ""
+    ) {
+      setDisabled(false);
+    }
+  }, [photo]);
 
   useEffect(() => {
     (async () => {
@@ -72,16 +88,19 @@ const CreatePostsScreen = ({ navigation }) => {
     const location = await Location.getCurrentPositionAsync();
     console.log("latitude: ---->", location.coords.latitude);
     console.log("longitude: ---->", location.coords.longitude);
-    setPhoto(photo.uri);
+    setPhoto((prevState) => ({ ...prevState, photo: photo.uri }));
     console.log("camera ------>", photo.uri);
   };
 
   const sendPhoto = () => {
     console.log("send pressed");
     console.log("navigation", navigation);
+    console.log(photo);
     // викликаємо навігацію на сторінку з постами і передаємо об'єкт із даними
     navigation.navigate("DefaultScreen", { photo: photo });
     setCamera(null);
+    setPhoto(initialPhoto);
+    setDisabled(true);
   };
 
   return (
@@ -101,7 +120,7 @@ const CreatePostsScreen = ({ navigation }) => {
       >
         {photo && (
           <View style={styles.previewWrapper}>
-            <Image source={{ uri: photo }} style={styles.previewPhoto} />
+            <Image source={{ uri: photo.photo }} style={styles.previewPhoto} />
           </View>
         )}
 
@@ -132,6 +151,13 @@ const CreatePostsScreen = ({ navigation }) => {
           style={styles.inputLocation}
           mode="outlined"
           placeholder="Description"
+          value={photo.description}
+          onChangeText={(value) =>
+            setPhoto((prevState) => ({
+              ...prevState,
+              description: value,
+            }))
+          }
         />
       </View>
 
@@ -146,6 +172,13 @@ const CreatePostsScreen = ({ navigation }) => {
           style={styles.inputLocation}
           mode="outlined"
           placeholder="Location"
+          value={photo.location}
+          onChangeText={(value) =>
+            setPhoto((prevState) => ({
+              ...prevState,
+              location: value,
+            }))
+          }
         />
       </View>
       <View style={styles.buttonsWrapper}>
