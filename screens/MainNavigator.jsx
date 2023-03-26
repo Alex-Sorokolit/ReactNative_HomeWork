@@ -1,4 +1,6 @@
 import React from "react";
+// import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
 import ProfileScreen from "./mainScreen/ProfileScreen";
@@ -7,13 +9,28 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import PostsScreen from "./mainScreen/PostsScreen";
 
+// const MainTab = createMaterialBottomTabNavigator();
 const MainTab = createBottomTabNavigator();
 
 const MainNavigation = () => {
   return (
-    <MainTab.Navigator screenOptions={{ showLabel: false }}>
+    <MainTab.Navigator
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#fff",
+        tabBarActiveBackgroundColor: "#FF6B00",
+        tabBarStyle: { paddingHorizontal: 70, paddingTop: 4, paddingBottom: 4 },
+        tabBarItemStyle: {
+          borderRadius: 20,
+          height: 40,
+          width: 70,
+        },
+      }}
+    >
       <MainTab.Screen
         name="Posts"
+        tabBarColor="#FF6B00"
         component={PostsScreen}
         options={{
           tabBarIcon: ({ focused, size, color }) => (

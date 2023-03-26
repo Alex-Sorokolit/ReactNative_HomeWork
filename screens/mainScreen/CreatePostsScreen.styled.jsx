@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
 
-  locationIcon: {
+  inputIcon: {
     color: "#BDBDBD",
     marginRight: 8,
   },
@@ -98,12 +98,24 @@ const styles = StyleSheet.create({
     color: "#212121",
   },
 
+  absoluteFill: {
+    width: 70,
+    height: 40,
+    backgroundColor: "#FF6C00",
+  },
+
   // Publication _____________________
+  buttonsWrapper: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
   publicationBtn: {
     borderRadius: 100,
     padding: 16,
     width: "100%",
-    marginBottom: 120,
+    // marginBottom: 120,
     // backgroundColor: "#151515",
   },
 

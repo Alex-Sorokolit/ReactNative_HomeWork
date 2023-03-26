@@ -80,7 +80,7 @@ const CreatePostsScreen = ({ navigation }) => {
     console.log("send pressed");
     console.log("navigation", navigation);
     // викликаємо навігацію на сторінку з постами і передаємо об'єкт із даними
-    navigation.navigate("DefaultScreen1", { photo: photo });
+    navigation.navigate("DefaultScreen", { photo: photo });
     setCamera(null);
   };
 
@@ -122,11 +122,25 @@ const CreatePostsScreen = ({ navigation }) => {
       <Text style={styles.downoladText}>Downolad photo</Text>
 
       <View style={styles.locationSection}>
+        <MaterialIcons
+          name="edit"
+          size={24}
+          color="#BDBDBD"
+          style={styles.inputIcon}
+        />
+        <TextInput
+          style={styles.inputLocation}
+          mode="outlined"
+          placeholder="Description"
+        />
+      </View>
+
+      <View style={styles.locationSection}>
         <SimpleLineIcons
           name="location-pin"
           size={24}
           color="#BDBDBD"
-          style={styles.locationIcon}
+          style={styles.inputIcon}
         />
         <TextInput
           style={styles.inputLocation}
@@ -134,39 +148,41 @@ const CreatePostsScreen = ({ navigation }) => {
           placeholder="Location"
         />
       </View>
-      <Pressable
-        style={({ pressed }) => [
-          styles.publicationBtn,
-          { opacity: pressed ? 0.8 : 1 },
-          {
-            backgroundColor: isDisabled ? "#E8E8E8" : "#FF6C00",
-          },
-        ]}
-        onPress={() => sendPhoto()}
-        disabled={isDisabled}
-      >
-        <Text
-          style={[
-            { color: isDisabled ? "#BDBDBD" : "#ffffff" },
-            styles.publicationBtnText,
+      <View style={styles.buttonsWrapper}>
+        <Pressable
+          style={({ pressed }) => [
+            styles.publicationBtn,
+            { opacity: pressed ? 0.8 : 1 },
+            {
+              backgroundColor: isDisabled ? "#E8E8E8" : "#FF6C00",
+            },
           ]}
+          onPress={() => sendPhoto()}
+          disabled={isDisabled}
         >
-          Publication
-        </Text>
-      </Pressable>
-      <Pressable
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? "#FF6C0099" : "#FF6C00",
-          },
-          styles.removeBtn,
-        ]}
-        onPress={() => {
-          console.log("delete pressed");
-        }}
-      >
-        <FontAwesome5 name="trash-alt" size={24} color="#BDBDBD" />
-      </Pressable>
+          <Text
+            style={[
+              { color: isDisabled ? "#BDBDBD" : "#ffffff" },
+              styles.publicationBtnText,
+            ]}
+          >
+            Publication
+          </Text>
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? "#FF6C0099" : "#FF6C00",
+            },
+            styles.removeBtn,
+          ]}
+          onPress={() => {
+            console.log("delete pressed");
+          }}
+        >
+          <FontAwesome5 name="trash-alt" size={24} color="#BDBDBD" />
+        </Pressable>
+      </View>
     </View>
   );
 };
