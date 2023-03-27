@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
 import ProfileScreen from "./mainScreen/ProfileScreen";
@@ -12,7 +12,7 @@ import PostsScreen from "./mainScreen/PostsScreen";
 // const MainTab = createMaterialBottomTabNavigator();
 const MainTab = createBottomTabNavigator();
 
-const MainNavigation = () => {
+const MainNavigation = ({ navigation }) => {
   return (
     <MainTab.Navigator
       screenOptions={{
@@ -56,6 +56,7 @@ const MainNavigation = () => {
         name="Create"
         component={CreatePostsScreen}
         options={{
+          tabBarStyle: { display: "none" },
           tabBarIcon: ({ focused, size, color }) => (
             <MaterialCommunityIcons name="plus" size={size} color={color} />
           ),

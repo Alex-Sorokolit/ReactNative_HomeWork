@@ -8,9 +8,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
-const initialPhoto = {
-  photo: "",
+const initialState = {
+  photo: null,
   description: "",
   location: "",
 };
@@ -18,21 +19,22 @@ const initialPhoto = {
 const CreatePostsScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(CameraType.back);
-  const [photo, setPhoto] = useState(initialPhoto);
+  const [state, setState] = useState(initialState);
   const [isDisabled, setDisabled] = useState(true);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const { photo } = state;
 
   useEffect(() => {
     if (
-      photo.photo !== "" &&
-      photo.description !== "" &&
-      photo.location !== ""
+      state.photo !== "" &&
+      state.description !== "" &&
+      state.location !== ""
     ) {
       setDisabled(false);
     }
-  }, [photo]);
+  }, [state]);
 
   useEffect(() => {
     (async () => {
@@ -88,57 +90,78 @@ const CreatePostsScreen = ({ navigation }) => {
     const location = await Location.getCurrentPositionAsync();
     console.log("latitude: ---->", location.coords.latitude);
     console.log("longitude: ---->", location.coords.longitude);
-    setPhoto((prevState) => ({ ...prevState, photo: photo.uri }));
+    setState((prevState) => ({ ...prevState, photo: photo.uri }));
     console.log("camera ------>", photo.uri);
   };
 
   const sendPhoto = () => {
     console.log("send pressed");
     console.log("navigation", navigation);
-    console.log(photo);
+    console.log(state);
     // викликаємо навігацію на сторінку з постами і передаємо об'єкт із даними
-    navigation.navigate("DefaultScreen", { photo: photo });
+    navigation.navigate("DefaultScreen", { photo: state });
     setCamera(null);
-    setPhoto(initialPhoto);
+    setState(initialState);
     setDisabled(true);
+  };
+
+  const removePost = () => {
+    setState(initialState);
+    navigation.navigate("Posts", { name: "Posts" });
   };
 
   return (
     <View style={styles.container}>
-      <Camera
-        style={styles.camera}
-        type={type}
-        ref={(ref) => {
-          setCamera(ref);
-        }}
-        onCameraReady={() => {
-          console.log("camera ready");
-        }}
-        onMountError={() => {
-          console.log("camera Error");
-        }}
-      >
-        {photo && (
-          <View style={styles.previewWrapper}>
-            <Image source={{ uri: photo.photo }} style={styles.previewPhoto} />
-          </View>
-        )}
-
-        <Pressable style={styles.circle} onPress={resumePrew}></Pressable>
-
-        <Pressable style={styles.circle} onPress={takePhoto}>
-          <MaterialIcons
-            name="photo-camera"
-            size={24}
-            color="#fff"
-            style={styles.cameraIcon}
-          />
-        </Pressable>
-        <Pressable style={styles.flipBtn} onPress={toggleCameraType}>
-          <Entypo name="retweet" size={24} color="#fff" />
-        </Pressable>
-      </Camera>
-      <Text style={styles.downoladText}>Downolad photo</Text>
+      {photo ? (
+        <View style={styles.cameraCoverWrapper}>
+          <Image source={{ uri: photo }} style={styles.cameraCover} />
+          <Pressable
+            style={styles.circle}
+            onPress={(prevState) => setState({ ...prevState, photo: null })}
+          >
+            <FontAwesome name="repeat" size={24} color="#FFF" />
+          </Pressable>
+        </View>
+      ) : (
+        <Camera
+          style={styles.camera}
+          type={type}
+          ref={(ref) => {
+            setCamera(ref);
+          }}
+          onCameraReady={() => {
+            console.log("camera ready");
+          }}
+          onMountError={() => {
+            console.log("camera Error");
+          }}
+        >
+          {photo && (
+            <View style={styles.previewWrapper}>
+              <Image
+                source={{ uri: photo.photo }}
+                style={styles.previewPhoto}
+              />
+            </View>
+          )}
+          <Pressable style={styles.circle} onPress={takePhoto}>
+            <MaterialIcons
+              name="photo-camera"
+              size={24}
+              color="#fff"
+              style={styles.cameraIcon}
+            />
+          </Pressable>
+          <Pressable style={styles.flipBtn} onPress={toggleCameraType}>
+            <Entypo name="retweet" size={24} color="#fff" />
+          </Pressable>
+        </Camera>
+      )}
+      {photo ? (
+        <Text style={styles.downoladText}>Edit photo</Text>
+      ) : (
+        <Text style={styles.downoladText}>Upload photo</Text>
+      )}
 
       <View style={styles.locationSection}>
         <MaterialIcons
@@ -151,9 +174,9 @@ const CreatePostsScreen = ({ navigation }) => {
           style={styles.inputLocation}
           mode="outlined"
           placeholder="Description"
-          value={photo.description}
+          value={state.description}
           onChangeText={(value) =>
-            setPhoto((prevState) => ({
+            setState((prevState) => ({
               ...prevState,
               description: value,
             }))
@@ -172,9 +195,9 @@ const CreatePostsScreen = ({ navigation }) => {
           style={styles.inputLocation}
           mode="outlined"
           placeholder="Location"
-          value={photo.location}
+          value={state.location}
           onChangeText={(value) =>
-            setPhoto((prevState) => ({
+            setState((prevState) => ({
               ...prevState,
               location: value,
             }))
@@ -209,9 +232,7 @@ const CreatePostsScreen = ({ navigation }) => {
             },
             styles.removeBtn,
           ]}
-          onPress={() => {
-            console.log("delete pressed");
-          }}
+          onPress={removePost}
         >
           <FontAwesome5 name="trash-alt" size={24} color="#BDBDBD" />
         </Pressable>

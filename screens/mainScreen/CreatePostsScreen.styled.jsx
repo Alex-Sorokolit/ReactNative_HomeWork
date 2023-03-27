@@ -13,19 +13,23 @@ const styles = StyleSheet.create({
   // Camera ___________________________
   camera: {
     width: "100%",
-    height: 240,
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
     borderColor: "#E8E8E8",
-    flexDirection: "row-reverse",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "center",
     marginBottom: 8,
     borderRadius: 8,
     overflow: "hidden",
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
+    alignItems: "flex-end",
+    height: 240,
   },
   circle: {
+    position: "absolute",
+    bottom: 0,
+    left: "50%",
+    transform: [{ translateX: -30 }],
     width: 60,
     height: 60,
     backgroundColor: "#FFFFFF22",
@@ -41,6 +45,9 @@ const styles = StyleSheet.create({
   },
 
   flipBtn: {
+    position: "absolute",
+    bottom: 0,
+    left: 16,
     width: 60,
     height: 60,
     backgroundColor: "#FFFFFF22",
@@ -69,7 +76,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: "#BDBDBD",
-    marginBottom: 98,
+    marginBottom: 32,
+  },
+
+  cameraCoverWrapper: {
+    width: "100%",
+    height: 240,
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+    height: 240,
+  },
+  cameraCover: {
+    flex: 1,
+    justifyContent: "center",
   },
   // location _________________________
   locationSection: {
@@ -107,14 +126,19 @@ const styles = StyleSheet.create({
   // Publication _____________________
   buttonsWrapper: {
     flex: 1,
+    flexDirection: "column",
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
+    paddingHorizontal: 16,
   },
+
   publicationBtn: {
     borderRadius: 100,
     padding: 16,
     width: "100%",
+
     // marginBottom: 120,
     // backgroundColor: "#151515",
   },
