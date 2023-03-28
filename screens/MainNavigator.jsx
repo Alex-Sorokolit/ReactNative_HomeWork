@@ -1,19 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
+// import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import PostsScreen from "./mainScreen/PostsScreen";
-import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
-import ProfileScreen from "./mainScreen/ProfileScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+
+import PostsScreen from "./nestedScreens/PostsScreen";
+import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
+import ProfileScreen from "./mainScreen/ProfileScreen";
 
 const MainTab = createBottomTabNavigator();
 
 const MainNavigation = () => {
   return (
-    <MainTab.Navigator screenOptions={{ showLabel: false }}>
+    <MainTab.Navigator
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#fff",
+        tabBarActiveBackgroundColor: "#FF6B00",
+        tabBarStyle: { paddingHorizontal: 70, paddingTop: 4, paddingBottom: 4 },
+        tabBarItemStyle: {
+          borderRadius: 20,
+          height: 40,
+          width: 70,
+        },
+      }}
+    >
       <MainTab.Screen
         name="Posts"
+        tabBarColor="#FF6B00"
         component={PostsScreen}
         options={{
           tabBarIcon: ({ focused, size, color }) => (
@@ -39,6 +56,7 @@ const MainNavigation = () => {
         name="Create"
         component={CreatePostsScreen}
         options={{
+          tabBarStyle: { display: "none" },
           tabBarIcon: ({ focused, size, color }) => (
             <MaterialCommunityIcons name="plus" size={size} color={color} />
           ),
