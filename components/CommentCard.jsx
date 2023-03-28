@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
   textWrapper: {
     padding: 16,
     flex: 1,
-    backgroundColor: "#F7F7F7",
-    backgroundColor: "#909090",
+    backgroundColor: "#F6F6F6",
     borderBottomLeftRadius: 6,
     borderBottomRightRadius: 6,
     borderTopRightRadius: 6,

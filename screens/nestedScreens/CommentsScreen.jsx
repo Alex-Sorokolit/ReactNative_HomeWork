@@ -1,8 +1,15 @@
-import { StyleSheet, Text, Image, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  Image,
+  FlatList,
+  View,
+  Pressable,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import CommentCard from "../../components/CommentCard";
-import { TextInput } from "react-native";
-import { FlatList } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 const initialComments = [
   {
@@ -47,15 +54,23 @@ const CommentsScreen = ({ route }) => {
           <CommentCard comment={item.comment} date={item.date} />
         )}
       />
-      <TextInput
-        style={styles.commentInput}
-        // onFocus={() => {
-        //   setKeyboardStatus(true);
-        // }}
-        value={newComment}
-        onChangeText={(value) => setNewComment(value)}
-        mode="outlined"
-      />
+
+      <View style={styles.inputWrapper}>
+        <TextInput
+          style={styles.commentInput}
+          // onFocus={() => {
+          //   setKeyboardStatus(true);
+          // }}
+          placeholder="Comment..."
+          value={newComment}
+          onChangeText={(value) => setNewComment(value)}
+          mode="outlined"
+        />
+
+        <Pressable style={styles.commentBtn}>
+          <AntDesign name="arrowup" size={24} color="#FFFFFF" />
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -83,5 +98,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E8E8E8",
     borderRadius: 100,
+    height: 50,
+    padding: 16,
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+  },
+  commentBtn: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    backgroundColor: "#FF6C00",
+    width: 34,
+    height: 34,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputWrapper: {
+    position: "relative",
+    marginBottom: 16,
   },
 });

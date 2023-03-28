@@ -7,7 +7,7 @@ import MainNavigation from "../MainNavigator";
 
 const Stack = createNativeStackNavigator();
 
-const PostsStack = ({ navigation }) => {
+const PostsStack = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
