@@ -97,9 +97,9 @@ const CreatePostsScreen = ({ navigation }) => {
   const sendPhoto = () => {
     console.log("send pressed");
     console.log("navigation", navigation);
-    console.log(state);
+    console.log("state --->", state);
     // викликаємо навігацію на сторінку з постами і передаємо об'єкт із даними
-    navigation.navigate("DefaultScreen", { photo: state });
+    navigation.navigate("Posts", { photo: state });
     setCamera(null);
     setState(initialState);
     setDisabled(true);
@@ -107,7 +107,7 @@ const CreatePostsScreen = ({ navigation }) => {
 
   const removePost = () => {
     setState(initialState);
-    navigation.navigate("Posts", { name: "Posts" });
+    navigation.navigate("Posts");
   };
 
   return (

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import PostCard from "../../components/PostCard";
 
 // route приймає всі дані які прийшли із навігації
-const DefaultScreenPosts = ({ route, navigation }) => {
+const PostsScreen = ({ route, navigation }) => {
   const [posts, setPosts] = useState([]);
 
   //  при монтажі компоненту записуємо route.params (фото) у масив posts
@@ -48,7 +48,7 @@ const DefaultScreenPosts = ({ route, navigation }) => {
   );
 };
 
-export default DefaultScreenPosts;
+export default PostsScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 // import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
-import ProfileScreen from "./mainScreen/ProfileScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import PostsScreen from "./mainScreen/PostsScreen";
 
-// const MainTab = createMaterialBottomTabNavigator();
+import PostsScreen from "./nestedScreens/PostsScreen";
+import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
+import ProfileScreen from "./mainScreen/ProfileScreen";
+
 const MainTab = createBottomTabNavigator();
 
-const MainNavigation = ({ navigation }) => {
+const MainNavigation = () => {
   return (
     <MainTab.Navigator
       screenOptions={{
