@@ -15,7 +15,11 @@ const PostsScreen = ({ route, navigation }) => {
     return;
   }, [route.params]);
 
-  const goToMap = () => navigation.navigate("Map");
+  const goToMap = (latitude, longitude) =>
+    navigation.navigate("Map", {
+      location: { latitude: latitude, longitude: longitude },
+    });
+
   const goToComments = (photo) =>
     navigation.navigate("Comments", { photo: photo });
   return (
@@ -38,7 +42,7 @@ const PostsScreen = ({ route, navigation }) => {
           renderItem={({ item }) => (
             <PostCard
               photo={item.photo.photo}
-              goToMap={goToMap}
+              goToMap={() => goToMap(item.photo.latitude, item.photo.longitude)}
               goToComments={() => goToComments(item.photo.photo)}
             />
           )}

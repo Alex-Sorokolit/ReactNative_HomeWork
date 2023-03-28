@@ -14,6 +14,8 @@ const initialState = {
   photo: null,
   description: "",
   location: "",
+  latitude: "",
+  longitude: "",
 };
 
 const CreatePostsScreen = ({ navigation }) => {
@@ -90,6 +92,11 @@ const CreatePostsScreen = ({ navigation }) => {
     const location = await Location.getCurrentPositionAsync();
     console.log("latitude: ---->", location.coords.latitude);
     console.log("longitude: ---->", location.coords.longitude);
+    setState((prevState) => ({
+      ...prevState,
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    }));
     setState((prevState) => ({ ...prevState, photo: photo.uri }));
     console.log("camera ------>", photo.uri);
   };

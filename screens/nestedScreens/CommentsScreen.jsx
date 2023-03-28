@@ -28,6 +28,15 @@ const initialComments = [
   },
 ];
 
+const Even = (arr) => {
+  for (let i = 0; i < arr.lenght; i += 1) {
+    if (i % 2 === 0) {
+      return "row-reverce";
+    }
+    return "row";
+  }
+};
+
 const CommentsScreen = ({ route }) => {
   const [photo, setPhoto] = useState(null);
   const [comments, setComments] = useState(initialComments);
@@ -51,7 +60,11 @@ const CommentsScreen = ({ route }) => {
         data={comments}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <CommentCard comment={item.comment} date={item.date} />
+          <CommentCard
+            style={styles.item}
+            comment={item.comment}
+            date={item.date}
+          />
         )}
       />
 
@@ -83,6 +96,9 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 16,
     backgroundColor: "#fff",
+  },
+  item: {
+    backgroundColor: "#FF6C00",
   },
   image: {
     resizeMode: "cover",
