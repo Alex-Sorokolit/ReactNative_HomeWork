@@ -17,7 +17,8 @@ const PostsScreen = ({ route, navigation }) => {
 
   const goToMap = (latitude, longitude) =>
     navigation.navigate("Map", {
-      location: { latitude: latitude, longitude: longitude },
+      latitude: latitude,
+      longitude: longitude,
     });
 
   const goToComments = (photo) =>
