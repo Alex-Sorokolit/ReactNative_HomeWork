@@ -3,12 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   bgImage: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
+    justifyContent: "center",
+    paddingTop: 150,
   },
   wrapper: {
     position: "relative",
@@ -52,6 +54,13 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     textAlign: "center",
     marginBottom: 7,
+  },
+
+  list: {
+    // borderWidth: 1,
+    // borderColor: "red",
+    paddingHorizontal: 16,
+    backgroundColor: "#fff",
   },
 });
 

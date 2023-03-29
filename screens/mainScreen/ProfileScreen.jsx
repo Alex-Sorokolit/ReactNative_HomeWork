@@ -84,6 +84,7 @@ const ProfileScreen = ({ navigation }) => {
         </View>
         {posts.length !== 0 && (
           <FlatList
+            style={styles.list}
             data={posts}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
