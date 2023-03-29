@@ -25,28 +25,6 @@ initialState = [
       likes: 0,
     },
   },
-  {
-    photo: {
-      photo: "",
-      description: "Forest",
-      location: "Ukraine",
-      latitude: 37.4219972,
-      longitude: -122.0840118,
-      comments: 0,
-      likes: 0,
-    },
-  },
-  {
-    photo: {
-      photo: "",
-      description: "Forest",
-      location: "Ukraine",
-      latitude: 37.4219972,
-      longitude: -122.0840118,
-      comments: 0,
-      likes: 0,
-    },
-  },
 ];
 
 const ProfileScreen = ({ navigation }) => {
@@ -84,6 +62,7 @@ const ProfileScreen = ({ navigation }) => {
         </View>
         {posts.length !== 0 && (
           <FlatList
+            style={styles.list}
             data={posts}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (

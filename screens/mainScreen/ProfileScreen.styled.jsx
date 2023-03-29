@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
+    justifyContent: "center",
+    paddingTop: 100,
   },
   wrapper: {
     position: "relative",
@@ -52,6 +54,13 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     textAlign: "center",
     marginBottom: 7,
+  },
+
+  list: {
+    // borderWidth: 1,
+    // borderColor: "red",
+    paddingHorizontal: 16,
+    backgroundColor: "#fff",
   },
 });
 
