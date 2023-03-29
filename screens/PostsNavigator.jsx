@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 import React from "react";
-import CommentsScreen from "../nestedScreens/CommentsScreen";
-import MapScreen from "../nestedScreens/MapScreen";
+import CommentsScreen from "./postsNestedScreens/CommentsScreen";
+import MapScreen from "./postsNestedScreens/MapScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainNavigation from "../MainNavigator";
+import MainNavigation from "./MainNavigator";
 
 const Stack = createNativeStackNavigator();
 

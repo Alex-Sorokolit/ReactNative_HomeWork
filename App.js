@@ -2,7 +2,10 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigation from "./screens/AuthNavigation";
-import PostsStack from "./screens/mainScreen/PostsStack";
+import PostsStack from "./screens/PostsNavigator";
+// Redux
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const useRoute = (isAuth) => {
   if (!isAuth) {
@@ -12,14 +15,17 @@ const useRoute = (isAuth) => {
 };
 
 export default function App() {
-  const routing = useRoute({});
+  // якщо false то користувач не залогінений
+  const routing = useRoute(false);
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        {routing}
-        <StatusBar style="auto" />
-      </View>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <View style={styles.container}>
+          {routing}
+          <StatusBar style="auto" />
+        </View>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

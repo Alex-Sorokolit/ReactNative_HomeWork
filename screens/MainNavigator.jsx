@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-import PostsScreen from "./nestedScreens/PostsScreen";
+import PostsScreen from "./postsNestedScreens/PostsScreen";
 import CreatePostsScreen from "./mainScreen/CreatePostsScreen";
 import ProfileScreen from "./mainScreen/ProfileScreen";
 
