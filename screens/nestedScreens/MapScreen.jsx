@@ -2,16 +2,17 @@ import { StyleSheet, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import MapView, { Marker } from "react-native-maps";
 
-const MapScreen = ({ route }) => {
-  const [location, setLocation] = useState(null);
+const initialLocation = { latitude: 50.516339, longitude: 30.602185 };
 
-  //  при монтажі компоненту записуємо route.params (фото) у масив posts
+const MapScreen = ({ route }) => {
+  const [location, setLocation] = useState(initialLocation);
+
   useEffect(() => {
     if (route.params) {
-      console.log("params", route.params);
+      // console.log("params", route.params);
       setLocation(route.params);
+      // console.log("marker location --->", location);
     }
-    console.log("marker location --->", location);
     return;
   }, [route.params]);
 
@@ -20,20 +21,13 @@ const MapScreen = ({ route }) => {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          ...location,
+          latitudeDelta: 0.001,
+          longitudeDelta: 0.006,
         }}
-      />
-      {location && (
-        <Marker
-          coordinate={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-          }}
-        />
-      )}
+      >
+        <Marker coordinate={location} />
+      </MapView>
     </View>
   );
 };

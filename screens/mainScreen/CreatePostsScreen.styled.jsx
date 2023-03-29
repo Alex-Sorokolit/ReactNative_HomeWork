@@ -1,11 +1,16 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  keyboardAvoidingView: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "red",
+  },
   container: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: 16,
+    // paddingTop: 16,
     paddingHorizontal: 16,
     backgroundColor: "#fff",
   },
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     borderColor: "#E8E8E8",
     borderBottomWidth: 1,
-    marginBottom: 32,
+    // marginBottom: 32,
     paddingBottom: 16,
   },
 

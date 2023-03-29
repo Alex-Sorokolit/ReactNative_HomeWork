@@ -7,7 +7,11 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 const PostCard = ({ photo, goToComments, goToMap }) => {
   return (
     <View style={styles.card}>
-      <Image style={styles.image} source={{ uri: photo }} />
+      {photo !== "" && photo ? (
+        <Image style={styles.image} source={{ uri: photo }} />
+      ) : (
+        <View style={{ ...styles.image, backgroundColor: "#BDBDBD" }}></View>
+      )}
       <Text style={styles.description}>Description</Text>
       <View style={styles.btnWrapper}>
         <Pressable style={styles.button} onPress={goToComments}>
@@ -41,10 +45,10 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     width: "100%",
     height: 240,
-    // borderWidth: 1,
-    // borderColor: "#000",
     borderRadius: 8,
     marginBottom: 8,
+    // borderWidth: 1,
+    // borderColor: "#000",
   },
   description: {
     fontWeight: 500,

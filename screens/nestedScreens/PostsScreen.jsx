@@ -17,7 +17,8 @@ const PostsScreen = ({ route, navigation }) => {
 
   const goToMap = (latitude, longitude) =>
     navigation.navigate("Map", {
-      location: { latitude: latitude, longitude: longitude },
+      latitude: latitude,
+      longitude: longitude,
     });
 
   const goToComments = (photo) =>
@@ -35,7 +36,7 @@ const PostsScreen = ({ route, navigation }) => {
         </View>
       </View>
 
-      {posts && (
+      {posts.length !== 0 && (
         <FlatList
           data={posts}
           keyExtractor={(item, index) => index.toString()}
