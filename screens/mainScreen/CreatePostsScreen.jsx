@@ -1,5 +1,14 @@
 import styles from "./CreatePostsScreen.styled";
-import { TextInput, Pressable, Text, View, Image, Button } from "react-native";
+import {
+  TextInput,
+  Pressable,
+  Text,
+  View,
+  Image,
+  Button,
+  Keyboard,
+  KeyboardAvoidingView,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { Camera, CameraType } from "expo-camera";
 import * as Location from "expo-location";
@@ -19,6 +28,7 @@ const initialState = {
 };
 
 const CreatePostsScreen = ({ navigation }) => {
+  const [keyboardStatus, setKeyboardStatus] = useState("");
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(CameraType.back);
   const [state, setState] = useState(initialState);
@@ -27,6 +37,20 @@ const CreatePostsScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const { photo } = state;
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardStatus(false);
+    });
+    // при розмонтуванні знімаються слухачі подій
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (
@@ -118,133 +142,153 @@ const CreatePostsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {photo ? (
-        <View style={styles.cameraCoverWrapper}>
-          <Image source={{ uri: photo }} style={styles.cameraCover} />
-          <Pressable
-            style={styles.circle}
-            onPress={(prevState) => setState({ ...prevState, photo: null })}
+    <KeyboardAvoidingView
+      style={styles.keyboardAvoidingView}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View
+        style={{
+          ...styles.container,
+          paddingTop: keyboardStatus ? 0 : 32,
+        }}
+      >
+        {photo ? (
+          <View style={styles.cameraCoverWrapper}>
+            <Image source={{ uri: photo }} style={styles.cameraCover} />
+            <Pressable
+              style={styles.circle}
+              onPress={(prevState) => setState({ ...prevState, photo: null })}
+            >
+              <FontAwesome name="repeat" size={24} color="#FFF" />
+            </Pressable>
+          </View>
+        ) : (
+          <Camera
+            style={styles.camera}
+            type={type}
+            ref={(ref) => {
+              setCamera(ref);
+            }}
+            onCameraReady={() => {
+              console.log("camera ready");
+            }}
+            onMountError={() => {
+              console.log("camera Error");
+            }}
           >
-            <FontAwesome name="repeat" size={24} color="#FFF" />
+            {photo && (
+              <View style={styles.previewWrapper}>
+                <Image
+                  source={{ uri: photo.photo }}
+                  style={styles.previewPhoto}
+                />
+              </View>
+            )}
+            <Pressable style={styles.circle} onPress={takePhoto}>
+              <MaterialIcons
+                name="photo-camera"
+                size={24}
+                color="#fff"
+                style={styles.cameraIcon}
+              />
+            </Pressable>
+            <Pressable style={styles.flipBtn} onPress={toggleCameraType}>
+              <Entypo name="retweet" size={24} color="#fff" />
+            </Pressable>
+          </Camera>
+        )}
+        {photo ? (
+          <Text style={styles.downoladText}>Edit photo</Text>
+        ) : (
+          <Text style={styles.downoladText}>Upload photo</Text>
+        )}
+
+        <View
+          style={{
+            ...styles.locationSection,
+            marginBottom: keyboardStatus ? 16 : 32,
+          }}
+        >
+          <MaterialIcons
+            name="edit"
+            size={24}
+            color="#BDBDBD"
+            style={styles.inputIcon}
+          />
+          <TextInput
+            style={styles.inputLocation}
+            mode="outlined"
+            placeholder="Description"
+            value={state.description}
+            onChangeText={(value) =>
+              setState((prevState) => ({
+                ...prevState,
+                description: value,
+              }))
+            }
+          />
+        </View>
+
+        <View
+          style={{
+            ...styles.locationSection,
+            marginBottom: keyboardStatus ? 16 : 32,
+          }}
+        >
+          <SimpleLineIcons
+            name="location-pin"
+            size={24}
+            color="#BDBDBD"
+            style={styles.inputIcon}
+          />
+          <TextInput
+            style={styles.inputLocation}
+            mode="outlined"
+            placeholder="Location"
+            value={state.location}
+            onChangeText={(value) =>
+              setState((prevState) => ({
+                ...prevState,
+                location: value,
+              }))
+            }
+          />
+        </View>
+        <View style={styles.buttonsWrapper}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.publicationBtn,
+              { opacity: pressed ? 0.8 : 1 },
+              {
+                backgroundColor: isDisabled ? "#E8E8E8" : "#FF6C00",
+              },
+            ]}
+            onPress={() => sendPhoto()}
+            disabled={isDisabled}
+          >
+            <Text
+              style={[
+                { color: isDisabled ? "#BDBDBD" : "#ffffff" },
+                styles.publicationBtnText,
+              ]}
+            >
+              Publication
+            </Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed ? "#FF6C0099" : "#FF6C00",
+              },
+              styles.removeBtn,
+            ]}
+            onPress={removePost}
+          >
+            <FontAwesome5 name="trash-alt" size={24} color="#BDBDBD" />
           </Pressable>
         </View>
-      ) : (
-        <Camera
-          style={styles.camera}
-          type={type}
-          ref={(ref) => {
-            setCamera(ref);
-          }}
-          onCameraReady={() => {
-            console.log("camera ready");
-          }}
-          onMountError={() => {
-            console.log("camera Error");
-          }}
-        >
-          {photo && (
-            <View style={styles.previewWrapper}>
-              <Image
-                source={{ uri: photo.photo }}
-                style={styles.previewPhoto}
-              />
-            </View>
-          )}
-          <Pressable style={styles.circle} onPress={takePhoto}>
-            <MaterialIcons
-              name="photo-camera"
-              size={24}
-              color="#fff"
-              style={styles.cameraIcon}
-            />
-          </Pressable>
-          <Pressable style={styles.flipBtn} onPress={toggleCameraType}>
-            <Entypo name="retweet" size={24} color="#fff" />
-          </Pressable>
-        </Camera>
-      )}
-      {photo ? (
-        <Text style={styles.downoladText}>Edit photo</Text>
-      ) : (
-        <Text style={styles.downoladText}>Upload photo</Text>
-      )}
-
-      <View style={styles.locationSection}>
-        <MaterialIcons
-          name="edit"
-          size={24}
-          color="#BDBDBD"
-          style={styles.inputIcon}
-        />
-        <TextInput
-          style={styles.inputLocation}
-          mode="outlined"
-          placeholder="Description"
-          value={state.description}
-          onChangeText={(value) =>
-            setState((prevState) => ({
-              ...prevState,
-              description: value,
-            }))
-          }
-        />
       </View>
-
-      <View style={styles.locationSection}>
-        <SimpleLineIcons
-          name="location-pin"
-          size={24}
-          color="#BDBDBD"
-          style={styles.inputIcon}
-        />
-        <TextInput
-          style={styles.inputLocation}
-          mode="outlined"
-          placeholder="Location"
-          value={state.location}
-          onChangeText={(value) =>
-            setState((prevState) => ({
-              ...prevState,
-              location: value,
-            }))
-          }
-        />
-      </View>
-      <View style={styles.buttonsWrapper}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.publicationBtn,
-            { opacity: pressed ? 0.8 : 1 },
-            {
-              backgroundColor: isDisabled ? "#E8E8E8" : "#FF6C00",
-            },
-          ]}
-          onPress={() => sendPhoto()}
-          disabled={isDisabled}
-        >
-          <Text
-            style={[
-              { color: isDisabled ? "#BDBDBD" : "#ffffff" },
-              styles.publicationBtnText,
-            ]}
-          >
-            Publication
-          </Text>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            {
-              backgroundColor: pressed ? "#FF6C0099" : "#FF6C00",
-            },
-            styles.removeBtn,
-          ]}
-          onPress={removePost}
-        >
-          <FontAwesome5 name="trash-alt" size={24} color="#BDBDBD" />
-        </Pressable>
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
