@@ -71,6 +71,7 @@ const MainNavigation = () => {
             <Feather name="user" size={size} color={color} />
           ),
           headerTitleAlign: "center",
+          headerShown: false,
         }}
       />
     </MainTab.Navigator>

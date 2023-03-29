@@ -3,14 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   bgImage: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
     justifyContent: "center",
-    paddingTop: 100,
+    paddingTop: 150,
   },
   wrapper: {
     position: "relative",

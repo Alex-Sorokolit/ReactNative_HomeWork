@@ -25,6 +25,28 @@ initialState = [
       likes: 0,
     },
   },
+  {
+    photo: {
+      photo: "",
+      description: "Forest",
+      location: "Ukraine",
+      latitude: 37.4219972,
+      longitude: -122.0840118,
+      comments: 0,
+      likes: 0,
+    },
+  },
+  {
+    photo: {
+      photo: "",
+      description: "Forest",
+      location: "Ukraine",
+      latitude: 37.4219972,
+      longitude: -122.0840118,
+      comments: 0,
+      likes: 0,
+    },
+  },
 ];
 
 const ProfileScreen = ({ navigation }) => {
