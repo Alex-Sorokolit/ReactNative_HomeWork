@@ -12,6 +12,8 @@ import {
 } from "react-native";
 import styles from "./RegistrationScreen.styled";
 import AddButtonSvg from "../../components/AddButtonSvg";
+import { useDispatch } from "react-redux"; // портал через який прокидеємо асинхронні запити
+import { authSignUp } from "../../redux/auth/authOperations"; // функції реєстрації і логінізації
 
 const initialState = {
   name: "",
@@ -22,6 +24,9 @@ const initialState = {
 const RegistrationScreen = ({ navigation }) => {
   const [keyboardStatus, setKeyboardStatus] = useState("");
   const [candidat, setCandidat] = useState(initialState);
+
+  const dispatch = useDispatch();
+
   const { width } = useWindowDimensions();
 
   useEffect(() => {
@@ -42,8 +47,10 @@ const RegistrationScreen = ({ navigation }) => {
     };
   }, []);
 
-  const SignIn = () => {
+  const SignUp = () => {
     console.log(candidat);
+    // портал через який прокидуємо метод authSignIn
+    dispatch(authSignUp(candidat));
     setCandidat(initialState);
   };
 
@@ -86,7 +93,7 @@ const RegistrationScreen = ({ navigation }) => {
                   onChangeText={(value) =>
                     setCandidat((prevState) => ({ ...prevState, name: value }))
                   }
-                  maxLength={10}
+                  maxLength={30}
                   mode="outlined"
                 />
               </View>
@@ -102,7 +109,7 @@ const RegistrationScreen = ({ navigation }) => {
                   onChangeText={(value) =>
                     setCandidat((prevState) => ({ ...prevState, email: value }))
                   }
-                  maxLength={20}
+                  maxLength={30}
                   mode="outlined"
                 />
               </View>
@@ -122,7 +129,7 @@ const RegistrationScreen = ({ navigation }) => {
                       password: value,
                     }))
                   }
-                  maxLength={10}
+                  maxLength={16}
                   mode="outlined"
                 />
               </View>
@@ -135,9 +142,9 @@ const RegistrationScreen = ({ navigation }) => {
                   },
                   styles.registerBtn,
                 ]}
-                onPress={() => SignIn()}
+                onPress={() => SignUp()}
               >
-                <Text style={styles.registerBtnText}>Sign In </Text>
+                <Text style={styles.registerBtnText}>Sign Up </Text>
               </Pressable>
             )}
             {!keyboardStatus && (

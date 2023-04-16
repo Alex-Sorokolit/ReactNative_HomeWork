@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// можливість авторизації
+import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCEnBti8wPrEP__NBlfHU4xq_ERGfkTojw",
   authDomain: "rn-social-2b0ce.firebaseapp.com",
@@ -18,7 +15,21 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+export const app = initializeApp(firebaseConfig);
 
-export default firebase;
+// export const authenticate = getAuth(app);
+
+/* 
+Створення проекту firebase
+https://console.firebase.google.com/
+
+Залогінитись на сайті через gogle mail
+Створити проект
+Додати розділ Autentication та RealtimeDatabase
+
+Зайти в налаштування проекту і додати додаток (web app)
+Скопіювати параметри
+
+Встановити firebase: npm install firebase
+Створити файл firebase/config.js і вставити скопійовані параметри
+*/

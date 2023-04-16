@@ -9,5 +9,5 @@ export const authSlice = createSlice({
   // назва редюсера
   name: "auth",
   initialState: initialState,
-  reducers: {},
+  reducers: {}, // екшени
 });

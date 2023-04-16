@@ -3,6 +3,8 @@ import { authSlice } from "./auth/authSlice";
 
 // використовуємо combineReducer який об'єднує всі редюсери в один
 const rootReduser = combineReducers({
+  // authSlice.name це ім'я редюсера
+  // authSlice.reduce його значення
   [authSlice.name]: authSlice.reducer,
 });
 
