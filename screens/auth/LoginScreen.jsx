@@ -9,6 +9,8 @@ import {
   TouchableWithoutFeedback,
   useWindowDimensions,
 } from "react-native";
+import { useDispatch } from "react-redux"; // портал через який прокидеємо асинхронні запити
+import { authSignIn } from "../../redux/auth/authOperations"; // функції реєстрації і логінізації
 import styles from "./LoginScreen.styled";
 
 const initialState = {
@@ -20,6 +22,8 @@ const LoginScreen = ({ navigation }) => {
   const [keyboardStatus, setKeyboardStatus] = useState("");
   const [user, setUser] = useState(initialState);
   const { width } = useWindowDimensions();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log(width);
@@ -40,7 +44,8 @@ const LoginScreen = ({ navigation }) => {
   }, []);
 
   const SignIn = () => {
-    console.log(user);
+    // console.log(user);
+    dispatch(authSignIn(user));
     setUser(initialState);
   };
 

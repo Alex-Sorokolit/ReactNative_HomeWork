@@ -1,6 +1,4 @@
 import { initializeApp } from "firebase/app";
-// можливість авторизації
-import { getAuth } from "firebase/auth";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,8 +14,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-
-// export const authenticate = getAuth(app);
 
 /* 
 Створення проекту firebase

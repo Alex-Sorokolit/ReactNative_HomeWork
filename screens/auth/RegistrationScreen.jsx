@@ -48,7 +48,6 @@ const RegistrationScreen = ({ navigation }) => {
   }, []);
 
   const SignUp = () => {
-    console.log(candidat);
     // портал через який прокидуємо метод authSignIn
     dispatch(authSignUp(candidat));
     setCandidat(initialState);
