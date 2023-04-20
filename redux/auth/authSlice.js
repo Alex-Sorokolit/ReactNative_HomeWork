@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  uresId: null,
+  userId: null,
   name: null,
   stateChange: null,
 };
@@ -15,7 +15,7 @@ export const authSlice = createSlice({
   reducers: {
     updateUserProfile: (state, action) => ({
       ...state,
-      userId: action.payload.uresId,
+      userId: action.payload.userId,
       name: action.payload.name,
     }),
     authStateChange: (state, action) => ({
@@ -29,7 +29,7 @@ export const authSlice = createSlice({
 // Редюсер слайсу
 // const authReducer = authSlice.reducer;
 
-console.log("authSlice: ", JSON.stringify(authSlice, null, 2));
+// console.log("authSlice: ", JSON.stringify(authSlice, null, 2));
 
 /* 
 Функція createSlice() це надбудова над createAction() та createReducer(), яка приймає параметри налаштувань, створює і повертає типи екшенів, генератори екшенів та редюсер.

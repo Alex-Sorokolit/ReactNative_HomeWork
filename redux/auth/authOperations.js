@@ -1,5 +1,4 @@
 // функції для реєстрації і логінізації юзера, ці функції будуть пов'язані із store
-// import { createAsyncThunk } from "@reduxjs/toolkit";
 import app from "../../firebase/config";
 import {
   getAuth,
@@ -14,7 +13,8 @@ const auth = getAuth(app);
 // Registration
 export const authSignUp =
   ({ email, password, name }) =>
-  // console.log("email, password, nickName: ", email, password, name);
+  // console.log("email, password, name: ", email, password, name);
+  // email, password, name приходять через dispatch із форми реєстрації
 
   async (dispatch, getState) => {
     try {
@@ -28,17 +28,17 @@ export const authSignUp =
 
       // 3. робим запит за актуальними даними юзера
       const user = await auth.currentUser;
-      console.log("user: ", JSON.stringify(user, null, 2));
+      console.log("Current user: ", JSON.stringify(user, null, 2));
 
       //  4. Викликаємо dispatch в якому викликаємо action і прокидуємо в нього об'єкт який приходить, берем з нього uid та name і обновлюємо state
       dispatch(
         authSlice.actions.updateUserProfile({
           userId: user.uid,
-          name: user.name,
+          name: user.displayName,
         })
       );
 
-      console.log(user);
+      // console.log("Registration user: ", JSON.stringify(user, null, 2));
     } catch (error) {
       console.log("authSignIn Error: ", error.message);
     }
@@ -64,13 +64,26 @@ export const authSignIn =
 export const authSignOut = () => async (dispatch, getState) => {};
 
 // Check
-export const authStatus =
-  ({ email, password }) =>
-  async (dispatch, getState) => {
-    const user = await onAuthStateChanged(auth, (user) =>
-      console.log("user: ", user)
-    );
-  };
+export const authStatus = () => async (dispatch, getState) => {
+  await onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("Status user: ", JSON.stringify(user, null, 2));
+      dispatch(
+        authSlice.actions.updateUserProfile({
+          userId: user.uid,
+          name: user.displayName,
+        })
+      );
+      dispatch(
+        authSlice.actions.authStateChange({
+          stateChange: true,
+        })
+      );
+    } else {
+      console.log("no authirized");
+    }
+  });
+};
 
 /* за рахунок того що ми працюємо із redux-toolkit ми можемо не встановлювати middelwares
   які дозвлять працювати із асинхронними запитами. 
